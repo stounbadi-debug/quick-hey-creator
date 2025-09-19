@@ -45,7 +45,7 @@ class WebSearchService {
 
   // ScrapingBee integration (using your updated API key)
   private async searchWithScrapingBee(query: string, intent?: string): Promise<MovieWebResult[]> {
-    const SCRAPINGBEE_API_KEY = "Q7IUIGECHH79FWPMIXARKKLES37JV8MVEWJXINIXCJNJDZTKKDZ0YYE1JD6ZEI7T16RBBKUAODRNRSVH";
+    const SCRAPINGBEE_API_KEY = "YOUR_API_KEY_HERE";
     
     try {
       // Search IMDB for movies matching the query
