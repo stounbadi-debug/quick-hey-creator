@@ -2,41 +2,80 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Movie Dashboard Design System - Cinematic Ultra Dark Theme */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Ultra Cinematic Background Colors */
+    --background: 220 20% 4%;
+    --foreground: 210 40% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* Glass-morphism Card System */
+    --card: 220 15% 8%;
+    --card-foreground: 210 40% 98%;
+    --card-hover: 220 15% 12%;
+    --card-glass: 220 15% 10% / 0.8;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    /* Interactive Elements */
+    --popover: 220 15% 10%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 222.2 47.4% 11.2%;
+    /* Neon Brand Colors */
+    --primary: 280 90% 55%;
     --primary-foreground: 210 40% 98%;
+    --primary-glow: 280 90% 65%;
+    --primary-dark: 280 90% 45%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Electric Accents */
+    --secondary: 220 15% 15%;
+    --secondary-foreground: 210 40% 98%;
+    --electric: 195 100% 50%;
+    --electric-glow: 195 100% 60%;
+    --gold: 45 100% 60%;
+    --gold-foreground: 220 20% 4%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted Elements with Better Contrast */
+    --muted: 220 15% 12%;
+    --muted-foreground: 215 15% 70%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
+    /* Status Colors Enhanced */
+    --accent: 220 15% 18%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 85% 60%;
     --destructive-foreground: 210 40% 98%;
+    --success: 142 76% 36%;
+    --warning: 48 96% 53%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Borders & Inputs Enhanced */
+    --border: 220 15% 18%;
+    --input: 220 15% 12%;
+    --ring: 280 90% 55%;
 
-    --radius: 0.5rem;
+    /* Design System Variables */
+    --radius: 1rem;
+    
+    /* Ultra Premium Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(280 90% 55%), hsl(280 90% 65%), hsl(195 100% 50%));
+    --gradient-card: linear-gradient(145deg, hsl(220 15% 8% / 0.9), hsl(220 15% 12% / 0.95), hsl(280 30% 10% / 0.8));
+    --gradient-hero: radial-gradient(ellipse at top, hsl(280 50% 15%), hsl(220 20% 4%)), linear-gradient(135deg, hsl(220 20% 4%), hsl(280 30% 8%));
+    --gradient-button: linear-gradient(135deg, hsl(280 90% 55%), hsl(280 90% 45%));
+    --gradient-glow: radial-gradient(circle, hsl(280 90% 55% / 0.3), transparent 70%);
+    --gradient-electric: linear-gradient(90deg, hsl(280 90% 55%), hsl(195 100% 50%));
+    --gradient-glass: linear-gradient(135deg, hsl(220 15% 15% / 0.1), hsl(220 15% 25% / 0.2));
+    
+    /* Advanced Shadows & Glows */
+    --shadow-card: 0 8px 32px -8px hsl(220 20% 2% / 0.6);
+    --shadow-glow: 0 0 40px hsl(280 90% 55% / 0.4);
+    --shadow-electric: 0 0 30px hsl(195 100% 50% / 0.3);
+    --shadow-gold: 0 0 25px hsl(45 100% 60% / 0.25);
+    --shadow-elevated: 0 20px 64px -12px hsl(220 20% 2% / 0.7);
+    --shadow-inner: inset 0 2px 8px hsl(220 20% 2% / 0.3);
+
+    /* Advanced Animations & Transitions */
+    --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+    --transition-elastic: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    --transition-fast: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
     --sidebar-background: 0 0% 98%;
 
@@ -101,5 +140,288 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    background: var(--gradient-hero);
+    min-height: 100vh;
+    overflow-x: hidden;
   }
+
+  html {
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+  /* Ultra Premium Movie Card Animations */
+  .movie-card {
+    @apply relative overflow-hidden backdrop-blur-sm border border-border/40;
+    transition: var(--transition-elastic);
+    box-shadow: var(--shadow-card);
+    background: var(--gradient-card);
+    transform-style: preserve-3d;
+  }
+  
+  .movie-card::before {
+    content: '';
+    @apply absolute inset-0 opacity-0 pointer-events-none;
+    background: var(--gradient-glow);
+    transition: var(--transition-smooth);
+  }
+  
+  .movie-card:hover {
+    transform: translateY(-8px) rotateX(5deg) scale(1.02);
+    box-shadow: var(--shadow-elevated), var(--shadow-glow);
+    border-color: hsl(var(--primary) / 0.6);
+  }
+  
+  .movie-card:hover::before {
+    opacity: 1;
+  }
+  
+  /* Glass-morphism Search Input */
+  .search-input {
+    @apply backdrop-blur-md border border-border/60;
+    background: var(--gradient-glass);
+    color: hsl(var(--foreground));
+    transition: var(--transition-smooth);
+    box-shadow: var(--shadow-inner);
+  }
+  
+  .search-input:focus {
+    box-shadow: var(--shadow-glow), var(--shadow-inner);
+    border-color: hsl(var(--primary) / 0.8);
+    background: var(--gradient-card);
+  }
+  
+  .search-input::placeholder {
+    color: hsl(var(--muted-foreground) / 0.7);
+  }
+  
+  /* Ultra Premium Gradient Text */
+  .gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 200%;
+    animation: gradient-shift 3s ease infinite;
+  }
+  
+  /* Electric Accent */
+  .electric-accent {
+    color: hsl(var(--electric));
+    text-shadow: 0 0 10px hsl(var(--electric) / 0.5);
+  }
+  
+  /* Gold Accent Enhanced */
+  .gold-accent {
+    color: hsl(var(--gold));
+    text-shadow: 0 0 15px hsl(var(--gold) / 0.4);
+  }
+  
+  /* Premium Loading Animation */
+  .loading-pulse {
+    background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.3), transparent);
+    background-size: 200% 100%;
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+  
+  /* Particle Background Effect */
+  .particle-bg::before {
+    content: '';
+    @apply absolute inset-0 pointer-events-none;
+    background: radial-gradient(circle at 20% 80%, hsl(280 90% 55% / 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, hsl(195 100% 50% / 0.1) 0%, transparent 50%);
+    animation: particle-float 8s ease-in-out infinite alternate;
+  }
+  
+  /* Neon Button Effects */
+  .neon-button {
+    @apply relative overflow-hidden;
+    background: var(--gradient-button);
+    box-shadow: var(--shadow-glow);
+    border: 1px solid hsl(var(--primary) / 0.5);
+    transition: var(--transition-bounce);
+  }
+  
+  .neon-button::before {
+    content: '';
+    @apply absolute inset-0 opacity-0;
+    background: linear-gradient(45deg, transparent, hsl(var(--primary-glow) / 0.3), transparent);
+    transition: var(--transition-smooth);
+  }
+  
+  .neon-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow), 0 10px 40px hsl(var(--primary) / 0.4);
+  }
+  
+  .neon-button:hover::before {
+    opacity: 1;
+    animation: shimmer 0.8s ease-out;
+  }
+  
+  /* Floating Animation - Reduced intensity */
+  .float {
+    animation: float 4s ease-in-out infinite;
+  }
+  
+  /* Glow Text */
+  .glow-text {
+    text-shadow: 0 0 20px hsl(var(--primary) / 0.8);
+    animation: text-glow 2s ease-in-out infinite alternate;
+  }
+}
+
+/* Enhanced Keyframe Animations */
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { background-position: -200% 0; }
+  50% { background-position: 200% 0; }
+}
+
+@keyframes particle-float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes text-glow {
+  0% { text-shadow: 0 0 20px hsl(var(--primary) / 0.5); }
+  100% { text-shadow: 0 0 30px hsl(var(--primary) / 1), 0 0 40px hsl(var(--primary) / 0.8); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scale-in {
+  from { 
+    opacity: 0; 
+    transform: scale(0.9); 
+  }
+  to { 
+    opacity: 1; 
+    transform: scale(1); 
+  }
+}
+
+@keyframes slide-up {
+  from { 
+    opacity: 0; 
+    transform: translateY(30px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+@keyframes slide-in-right {
+  from { 
+    opacity: 0; 
+    transform: translateX(100%); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateX(0); 
+  }
+}
+
+/* Utility Animation Classes */
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.5s ease-out;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.6s ease-out;
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.4s ease-out;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Enhanced Animation Classes */
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes bounce-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotate(10deg);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05) rotate(-5deg);
+  }
+  70% {
+    opacity: 0.9;
+    transform: scale(0.9) rotate(2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in 0.6s ease-out;
+}
+
+.animate-bounce-in {
+  animation: bounce-in 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Animation Delays */
+.delay-200 {
+  animation-delay: 0.2s;
+  animation-fill-mode: both;
+}
+
+.delay-300 {
+  animation-delay: 0.3s;
+  animation-fill-mode: both;
+}
+
+.delay-500 {
+  animation-delay: 0.5s;
+  animation-fill-mode: both;
+}
+
+.delay-1000 {
+  animation-delay: 1s;
+  animation-fill-mode: both;
 }
