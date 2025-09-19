@@ -22,7 +22,7 @@ export interface WebMovieResult {
 }
 
 class RealWebSearchService {
-  private scrapingBeeApiKey = import.meta.env.VITE_SCRAPINGBEE_API_KEY || 'Q7IUIGECHH79FWPMIXARKKLES37JV8MVEWJXINIXCJNJDZTKKDZ0YYE1JD6ZEI7T16RBBKUAODRNRSVH';
+  private scrapingBeeApiKey = import.meta.env.VITE_SCRAPINGBEE_API_KEY || 'YOUR_API_KEY_HERE';
 
   // Search the web for movies/TV shows using the user's query
   async searchWeb(query: string): Promise<WebMovieResult[]> {
