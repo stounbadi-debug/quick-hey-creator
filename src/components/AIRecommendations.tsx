@@ -519,21 +519,9 @@ const AIRecommendations = ({ onMoviesFound }: AIRecommendationsProps) => {
                           {Math.round(webMovie.confidence * 100)}% match
                         </Badge>
                       </div>
-                      {webMovie.director && (
-                        <p className="text-xs text-green-600 dark:text-green-400 mb-1">
-                          Director: {webMovie.director}
-                        </p>
-                      )}
-                      {webMovie.cast && webMovie.cast.length > 0 && (
-                        <p className="text-xs text-green-600 dark:text-green-400 mb-1">
-                          Cast: {webMovie.cast.slice(0, 3).join(', ')}
-                        </p>
-                      )}
-                      {webMovie.plot && (
-                        <p className="text-sm text-green-700 dark:text-green-300 leading-relaxed">
-                          {webMovie.plot}
-                        </p>
-                      )}
+                      <p className="text-sm text-green-700 dark:text-green-300 leading-relaxed">
+                        {webMovie.description}
+                      </p>
                       <div className="flex items-center justify-between mt-2">
                         <span className="text-xs text-green-500">Source: {webMovie.source}</span>
                         {webMovie.rating && (

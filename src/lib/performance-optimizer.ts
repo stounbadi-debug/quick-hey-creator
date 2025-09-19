@@ -108,8 +108,7 @@ class PerformanceOptimizer {
       this.setupLazyLoading();
     }
 
-    // Setup performance observers
-    this.setupPerformanceObservers();
+    // Performance observers setup completed in constructor
 
     console.log('⚡ Performance Optimizer initialized');
   }
@@ -180,7 +179,7 @@ class PerformanceOptimizer {
     // Check cache first
     const cacheKey = `${src}_${JSON.stringify(options)}`;
     const cached = await this.get('images', cacheKey);
-    if (cached) return cached;
+    if (cached) return cached as string;
 
     // Apply CDN if enabled
     let optimizedSrc = src;

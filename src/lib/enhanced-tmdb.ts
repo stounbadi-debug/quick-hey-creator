@@ -107,7 +107,7 @@ class EnhancedTMDBService {
       const sanitizedKeywords = keywords.map(k => securityManager.sanitizeSearchQuery(k));
       const query = sanitizedKeywords.join(' ').trim();
       if (!query) {
-        return { results: [], total_pages: 0, total_results: 0 };
+        return { results: [], page: 1, total_pages: 0, total_results: 0 };
       }
 
       // Multi-endpoint search strategy
@@ -154,13 +154,14 @@ class EnhancedTMDBService {
       
       return {
         results: sortedMovies,
+        page: 1,
         total_pages: Math.ceil(sortedMovies.length / 20),
         total_results: sortedMovies.length
       };
       
     } catch (error) {
       console.error('Advanced search failed:', error);
-      return { results: [], total_pages: 0, total_results: 0 };
+      return { results: [], page: 1, total_pages: 0, total_results: 0 };
     }
   }
 
@@ -191,6 +192,7 @@ class EnhancedTMDBService {
       
       const result = {
         results: movies,
+        page: data.page,
         total_pages: data.total_pages,
         total_results: data.total_results
       };
@@ -200,7 +202,7 @@ class EnhancedTMDBService {
       
     } catch (error) {
       console.error('Multi-search failed:', error);
-      return { results: [], total_pages: 0, total_results: 0 };
+      return { results: [], page: 1, total_pages: 0, total_results: 0 };
     }
   }
 
@@ -236,6 +238,7 @@ class EnhancedTMDBService {
       
       const result = {
         results: tvShows,
+        page: data.page,
         total_pages: data.total_pages,
         total_results: data.total_results
       };
@@ -245,7 +248,7 @@ class EnhancedTMDBService {
       
     } catch (error) {
       console.error('TV search failed:', error);
-      return { results: [], total_pages: 0, total_results: 0 };
+      return { results: [], page: 1, total_pages: 0, total_results: 0 };
     }
   }
 
@@ -302,6 +305,7 @@ class EnhancedTMDBService {
       const data = await response.json();
       const result = {
         results: data.results.map((movie: any) => this.normalizeMovieData(movie)),
+        page: data.page,
         total_pages: data.total_pages,
         total_results: data.total_results
       };
@@ -311,7 +315,7 @@ class EnhancedTMDBService {
       
     } catch (error) {
       console.error('Discover by genres failed:', error);
-      return { results: [], total_pages: 0, total_results: 0 };
+      return { results: [], page: 1, total_pages: 0, total_results: 0 };
     }
   }
 
@@ -322,7 +326,7 @@ class EnhancedTMDBService {
       const keywordIds = await this.findKeywordIds(keywords);
       
       if (keywordIds.length === 0) {
-        return { results: [], total_pages: 0, total_results: 0 };
+        return { results: [], page: 1, total_pages: 0, total_results: 0 };
       }
       
       await this.checkRateLimit();
@@ -343,13 +347,14 @@ class EnhancedTMDBService {
       const data = await response.json();
       return {
         results: data.results.map((movie: any) => this.normalizeMovieData(movie)),
+        page: data.page,
         total_pages: data.total_pages,
         total_results: data.total_results
       };
       
     } catch (error) {
       console.error('Discover by keywords failed:', error);
-      return { results: [], total_pages: 0, total_results: 0 };
+      return { results: [], page: 1, total_pages: 0, total_results: 0 };
     }
   }
 
@@ -402,6 +407,7 @@ class EnhancedTMDBService {
       const data = await response.json();
       const result = {
         results: data.results.map((item: any) => this.normalizeMovieData(item)),
+        page: data.page,
         total_pages: data.total_pages,
         total_results: data.total_results
       };
@@ -411,7 +417,7 @@ class EnhancedTMDBService {
       
     } catch (error) {
       console.error('Get trending content failed:', error);
-      return { results: [], total_pages: 0, total_results: 0 };
+      return { results: [], page: 1, total_pages: 0, total_results: 0 };
     }
   }
 

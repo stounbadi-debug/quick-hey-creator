@@ -294,31 +294,30 @@ Return ONLY a JSON array of movie IDs in ranked order:
     console.log('🔄 Using Universal Intelligence System (Ollama not available)');
     
     try {
-      const universalQuery: UniversalQuery = {
-        text: query.description,
-        context: 'movie_recommendation',
-        userPreferences: {
-          preferredEra: query.era,
-          mood: query.mood
-        }
-      };
+      // Fallback to basic movie search  
+      const enhancedQuery = `${query.description} ${query.era || ''} ${query.mood || ''}`.trim();
+      const movies = await tmdbService.searchMovies(enhancedQuery);
       
-      const universalResult = await universalIntelligence.processUniversalQuery(universalQuery);
-      
-      // Convert universal result to GPTOSSResult format
+      // Convert enhanced result to GPTOSSResult format
       return {
-        movies: universalResult.movies,
-        webResults: universalResult.webResults,
-        explanation: `🧠 Universal Intelligence Analysis:\n\n${universalResult.explanation}\n\n🔄 Ollama offline - using comprehensive fallback system`,
-        confidence: universalResult.confidence,
-        tags: [...universalResult.analysis.themes, ...universalResult.analysis.moods, 'universal-intelligence'],
-        searchStrategy: universalResult.analysis.searchApproach.toUpperCase(),
-        exactMatches: universalResult.analysis.confidence > 80,
-        totalSearched: universalResult.movies.length,
-        databaseCoverage: `Universal Intelligence: ${universalResult.sourcesUsed.join(', ')}`,
-        reasoning: universalResult.analysis.reasoning,
-        processingTime: universalResult.processingTime,
-        intentAnalysis: universalResult.analysis
+        movies: movies.results,
+        webResults: [],
+        explanation: `🔄 Ollama offline - using basic TMDB search fallback`,
+        confidence: 70,
+        tags: ['fallback-search'],
+        searchStrategy: 'BASIC_TMDB',
+        exactMatches: false,
+        totalSearched: movies.results.length,
+        databaseCoverage: `TMDB Basic Search`,
+        reasoning: 'Fallback to basic search due to service unavailability',
+        processingTime: Date.now() - Date.now(),
+        intentAnalysis: {
+          themes: [],
+          moods: [],
+          searchApproach: 'basic',
+          confidence: 70,
+          reasoning: 'Basic fallback search'
+        }
       };
       
     } catch (error) {
